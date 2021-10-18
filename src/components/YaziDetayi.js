@@ -1,19 +1,41 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import YaziYorumlari from "./YaziYorumlari";
+
 
 const YaziDetayi = (props) => {
   const { id } = props.match.params;
   const [yaziDetayi, setYaziDetayi] = useState({});
+  const [yorumlar, setYorumlar] = useState([]);
 
-  useEffect(() => {
+  const handleCommentSubmit = (event,yorum) => {
+    event.preventDefault();
     axios
-      .get(`https://react-yazi-yorum.herokuapp.com/posts/${id}`)
+      .post(
+        `https://react-yazi-yorum.herokuapp.com/posts/${id}/comments`,
+        yorum
+      )
       .then((response) => {
-        setYaziDetayi(response.data);
+        setYorumlar([...yorumlar, response.data]);
       })
       .catch((error) => {
         console.log(error);
       });
+  };
+
+  
+
+  useEffect(() => {
+
+    axios.all([
+      axios.get(`https://react-yazi-yorum.herokuapp.com/posts/${id}`),
+      axios.get(`https://react-yazi-yorum.herokuapp.com/posts/${id}/comments`)
+    ]).then(responses => {
+      setYaziDetayi(responses[0].data);
+      setYorumlar(responses[1].data);
+    }).catch(error =>{
+      console.log(error);
+    })
   }, []);
 
   return (
@@ -21,6 +43,9 @@ const YaziDetayi = (props) => {
       <h2 className="ui header">{yaziDetayi.title}</h2>
       <p>{yaziDetayi.created_at}</p>
       <p>{yaziDetayi.content}</p>
+      <hr />
+      <YaziYorumlari yorumlar={yorumlar} handleSubmit={handleCommentSubmit}/>
+      
     </React.Fragment>
   );
 };
