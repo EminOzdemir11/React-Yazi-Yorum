@@ -3,8 +3,6 @@ import YorumListesi from "./YorumListesi";
 import YorumFormu from "./YorumFormu";
 
 const YaziYorumlari = (props) => {
-  
-
   return (
   <React.Fragment>
     <YorumListesi yorumlar={props.yorumlar} />

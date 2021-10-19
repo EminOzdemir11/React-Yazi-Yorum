@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 
 const YORUM_BASLANGIC = {
   display_name: "",
@@ -6,20 +6,22 @@ const YORUM_BASLANGIC = {
 };
 
 const YorumFormu = (props) => {
-    const [yorum, setYorum] = useState(YORUM_BASLANGIC);
-      //setYorum(YORUM_BASLANGIC);
+  const [yorum, setYorum] = useState(YORUM_BASLANGIC);
+  //setYorum(YORUM_BASLANGIC);
 
-      const handleOnChange = (event) => {
-        setYorum({ ...yorum, [event.target.name]: event.target.value });
-      };
+  const handleOnChange = (event) => {
+    setYorum({ ...yorum, [event.target.name]: event.target.value });
+  };
   return (
     <React.Fragment>
       <h3>Yorum Yaz</h3>
-      <form className="ui form" onSubmit={(event)=>{
-        props.handleSubmit(event, yorum)
-        setYorum(YORUM_BASLANGIC)
-      }
-          }>
+      <form
+        className="ui form"
+        onSubmit={(event) => {
+          props.handleSubmit(event, yorum);
+          setYorum(YORUM_BASLANGIC);
+        }}
+      >
         <div className="ui mini icon input">
           <input
             name="display_name"
