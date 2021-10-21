@@ -4,9 +4,10 @@ import YorumFormu from "./YorumFormu";
 
 const YaziYorumlari = (props) => {
   return (
-  <React.Fragment>
-    <YorumListesi yorumlar={props.yorumlar} />
-    <YorumFormu handleSubmit={props.handleSubmit} />
-  </React.Fragment>);
+    <React.Fragment>
+      <YorumListesi yaziDetayi={props.yaziDetayi} yorumlar={props.yorumlar} />
+      <YorumFormu handleSubmit={props.handleSubmit} />
+    </React.Fragment>
+  );
 };
 export default YaziYorumlari;

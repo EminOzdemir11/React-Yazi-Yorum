@@ -53,7 +53,7 @@ const YaziDetayi = (props) => {
       </div>
       <p>{yaziDetayi.content}</p>
       <hr />
-      <YaziYorumlari yorumlar={yorumlar} handleSubmit={handleCommentSubmit} />
+      <YaziYorumlari yaziDetayi={yaziDetayi} yorumlar={yorumlar} handleSubmit={handleCommentSubmit} />
     </React.Fragment>
   );
 };
